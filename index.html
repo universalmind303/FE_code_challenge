@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html  >
+   <script src="/static/node_modules/angular/angular.min.js"></script>
+   <script src="static/node_modules/d3/index.js></script>
+
+    <script src="/static/src/app.js"></script>
+    <script src="/static/src/shapes.js"></script>
+    <script src="/static/src/shapeRenderer.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
+<body style='' ng-app='myApp' >
+<div ng-controller='main'>
+      <div d3-shapes></div>
+<!-- 
+      <form ng-submit="createShape()">
+
+
+          <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__label" for="new-card-title">Size</label>
+            <input class="" ng-model="size" type="text" id="new-card-title">
+              <label>
+              <div>
+              <span>Shape: 
+            <input type="radio" ng-model="shape" value="Circle">
+            Circle
+          </label>
+          <label>
+            <input type="radio" ng-model="shape" value="Square">
+            Square
+          </label>
+          </span></div>
+
+        <div class="btn btn-primary">
+          <input type="submit" class="">Create new Shape!</button>
+        </div>
+
+
+      </form> -->
+      <!-- <button ng-click="sortShapes()"> Sort these bitches</button> -->
+    <div ng-repeat="shape in shapeList | orderBy:'-area'">
+      <span>{{shape.toString()}}</span>
+      <!-- <span>Area: {{shape.getArea()}}</span> -->
+    </div>
+</div>
+<!-- <div ng-app='' -->
+</body>
+
+</html>
