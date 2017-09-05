@@ -2,38 +2,9 @@
 <html  >
 <body ng-app='myApp' >
   <div d3-shapes></div>
-  <div ng-controller='main'>
   <div ng-repeat="shape in shapeList | orderBy:'-area'">
     <span>{{shape.toString()}}</span>
    </div>
-  </div>
-    
-<!-- 
-      <form ng-submit="createShape()">
-
-
-          <div >
-            <label>Size</label>
-            <input class="" ng-model="size" type="text">
-              <label>
-              <div>
-              <span>Shape: 
-            <input type="radio" ng-model="shape" value="Circle">
-            Circle
-          </label>
-          <label>
-            <input type="radio" ng-model="shape" value="Square">
-            Square
-          </label>
-          </span></div>
-
-        <div>
-          <input type="submit" class="">Create new Shape!</button>
-        </div>
-
-
-      </form> -->
-      <!-- <button ng-click="sortShapes()"></button> -->
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
