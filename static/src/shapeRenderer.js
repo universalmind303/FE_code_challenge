@@ -1,18 +1,23 @@
-angular.module('myApp', )
-.directive('d3Shapes', ($window, $interval) =>({
-  restrict:'EA',
-  template:`<svg width='0' height='0'></svg>`,
-  link: function($scope, elem){
-    const d3 = $window.d3
-    const svg = d3.select('svg')
+class D3Directive {
+  constructor($window, $interval) {
+    this.template = `<svg width='0' height='0'></svg>`;
+    this.restrict = 'EA';
+    this.$window = $window;
+    this.$interval = $interval;
+  }
+  link($scope, elem){
+    let {$window, $interval} = this;
+    const d3 = $window.d3;
+    const svg = d3.select('svg');
 
     function drawShapes(data) {
       svg.selectAll('*').remove()
-    var [svgWidth, svgHeight] = [$window.innerWidth * .985, $window.innerHeight * .88]
+      var [svgWidth, svgHeight] = [$window.innerWidth * .985, $window.innerHeight * .88]
       svg.attr('width', svgWidth)
         .attr('height',svgHeight)
-      $scope.shapeList = data
-      var [xcount, ycount ] = [0, 10]
+      $scope.shapeList = data;
+      var [xcount, ycount ] = [0, 10];
+      var maxSize = 0;
       data.forEach(({constructor: {name}, size}) =>{
         xcount+= 5
         if(name === 'Circle') {
@@ -25,8 +30,9 @@ angular.module('myApp', )
             d3.select(this)
               .attr('cx', d3.event.x)
               .attr('cy', d3.event.y)
-            }))
-          xcount += size * 2 
+            })
+          )
+          xcount += size * 2;
         } else if (name === 'Square') {
           svg.append('rect')
             .attr('x', xcount)
@@ -38,16 +44,18 @@ angular.module('myApp', )
             d3.select(this)
               .attr('x', d3.event.x)
               .attr('y', d3.event.y)
-            }))
-          xcount+= size
+            })
+          )
+          xcount+= size;
         }           
         if(xcount + size * 2 > $window.innerWidth) {
           xcount = 0
           ycount += size + 30 
         }
+        maxSize = Math.max(maxSize, size);
       })
-      if(svgHeight < ycount + 30 ) {
-        svgHeight += 30
+      if(svgHeight < ycount + maxSize ) {
+        svgHeight = ycount + maxSize + 20; 
         svg.attr('height', svgHeight)          
       }
     }
@@ -57,7 +65,6 @@ angular.module('myApp', )
     var rotation = 0
     $interval(() =>{
       rotation <= 360 ? rotation += 10 : rotation = 0
-
       svg.selectAll('rect')
         .each(function () {
           let {x,y, width, height} = this
@@ -68,5 +75,6 @@ angular.module('myApp', )
         })
     },500)
   }
-  })
-);
+}
+angular.module('ShapeRenderer', ['myApp'])
+.directive('d3Shapes', D3Directive);
