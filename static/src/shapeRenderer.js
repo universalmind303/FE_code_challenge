@@ -6,8 +6,8 @@ class D3Directive {
     this.$interval = $interval;
   }
   link($scope, elem){
-    let {$window, $interval} = this;
-    const d3 = $window.d3;
+    const {$window, $interval} = this;
+    const {d3} = $window;
     const svg = d3.select('svg');
 
     function drawShapes(data) {
