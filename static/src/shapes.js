@@ -1,9 +1,11 @@
-class Shape {
+classDecorator Shape {
   getArea() {
     return Math.trunc(this.area)
   }
 }
-class Circle extends Shape {
+
+@Shape
+class Circle {
   constructor(radius) {
     super()
     this.size = radius
@@ -13,7 +15,8 @@ class Circle extends Shape {
     return `Circle: Radius = ${this.size}, Area = ${this.getArea()}`
   }
 }
-class Square extends Shape{
+@Shape
+class Square{
   constructor(x) {
     super()
     this.size = x
